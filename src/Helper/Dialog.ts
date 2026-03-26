@@ -20,7 +20,7 @@ export class DialogHelper {
             title: this.title,
             html,
             width: 800,
-            height: 400,
+            height: 600,
             resizable: true,
             buttons: [],
         }).parent()

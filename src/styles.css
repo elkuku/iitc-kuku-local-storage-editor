@@ -25,8 +25,6 @@
 }
 
 .ls-table th {
-    background: #444;
-    color: #fff;
     padding: 4px 6px;
     text-align: left;
     position: sticky;
@@ -35,11 +33,10 @@
 
 .ls-table td {
     padding: 3px 6px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid;
     vertical-align: top;
+    opacity: .85;
 }
-
-.ls-table tr:hover td { background: #f0f0f0 }
 
 .ls-key {
     font-weight: bold;
@@ -48,7 +45,6 @@
 }
 
 .ls-value {
-    color: #555;
     word-break: break-all;
     font-family: monospace;
 }
@@ -59,14 +55,14 @@
 
 .ls-empty {
     text-align: center;
-    color: #888;
+    opacity: .6;
     padding: 12px;
 }
 
 .ls-edit-form {
     padding: 8px;
-    border-top: 2px solid #ccc;
-    background: #f9f9f9;
+    border-top: 2px solid;
+    opacity: .9;
 }
 
 .ls-form-row {
@@ -85,12 +81,6 @@
 .ls-form-row textarea {
     flex: 1;
     font-family: monospace;
-    font-size: 11px;
-}
-
-.ls-form-row input[readonly] {
-    background: #e8e8e8;
-    color: #555;
 }
 
 .ls-form-btns {
