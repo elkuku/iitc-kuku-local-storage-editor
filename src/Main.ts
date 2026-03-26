@@ -7,7 +7,7 @@ import plugin from '../plugin.json'
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const PLUGIN_NAME = plugin.name.replace('IITC plugin: ', '') as string
 console.log(PLUGIN_NAME)
-class Main implements Plugin.Class {
+export class Main implements Plugin.Class {
 
     private dialogHelper: DialogHelper
     private dialog?: JQuery

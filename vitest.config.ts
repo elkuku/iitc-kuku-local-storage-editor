@@ -13,7 +13,7 @@ export default defineConfig({
         coverage: {
             provider: 'v8',
             reporter: ['text', 'html', 'json-summary'],
-            include: ['src/Helper/**/*.ts'],
+            include: ['src/**/*.ts'],
             exclude: ['src/**/*.spec.ts'],
         },
     },
