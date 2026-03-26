@@ -1,42 +1,43 @@
 body {
-    background-color: rgb(39, 37, 28);
-    color: #e2c532;
+    background: #222;
+    color: #eee;
+    padding-top: 2em;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: rgb(119, 107, 54);
-}
-
-a {
-    color: #00ffbb;
-}
-
-a:hover {
-    color: #ffffff;
-}
-
-div.release-container {
-    border: 1px solid lightgray;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-table.changelog-table td {
-    padding: 5px;
-}
-
-table.changelog-table tr {
-    vertical-align: top;
-}
-
-td.changelog-version {
-    color: orange;
-}
-
-td.changelog-date {
-    color: wheat;
+.container {
+    max-width: 800px;
 }
 
 pre.changelog {
-    color: lime;
+    white-space: pre-wrap;
+    background: #333;
+    padding: .5em;
+    border-radius: 4px;
+}
+
+.changelog-table {
+    width: 100%;
+}
+
+.changelog-version {
+    font-weight: bold;
+    vertical-align: top;
+    padding-right: 1em;
+}
+
+.changelog-date {
+    opacity: .7;
+    vertical-align: top;
+    padding-right: 1em;
+}
+
+.release-container {
+    background: #333;
+    padding: 1em;
+    border-radius: 8px;
+    margin-bottom: 2em;
+}
+
+a {
+    color: #4caf50;
 }

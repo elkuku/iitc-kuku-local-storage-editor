@@ -26,8 +26,17 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: 'yarn'
+
+      # -------------------------------
+      # Run tests and generate coverage
+      # -------------------------------
+
+      - name: Run tests with coverage
+        run: |
+          yarn install --immutable --frozen-lockfile
+          yarn test:coverage
 
       # -------------------------------
       # Build latest commit (HEAD)
@@ -35,7 +44,6 @@ jobs:
 
       - name: Build HEAD
         run: |
-          yarn install --immutable --frozen-lockfile
           yarn build:dev
           mkdir -p build/dev
           cp -r dist/* build/dev/
@@ -46,15 +54,14 @@ jobs:
 
       - name: Detect latest tag
         id: tag_check
-        run: TAG=$(git tag --sort=-v:refname | head -n 1 || true)
-          
+        run: |
+          TAG=$(git tag --sort=-v:refname | head -n 1 || true)
           echo "tag=$TAG";
-          
           if [ -z "$TAG" ]; then
-          echo "has_tag=false" >> "$GITHUB_OUTPUT";
+            echo "has_tag=false" >> "$GITHUB_OUTPUT";
           else
-          echo "has_tag=true" >> "$GITHUB_OUTPUT";
-          echo "tag=$TAG" >> "$GITHUB_OUTPUT";
+            echo "has_tag=true" >> "$GITHUB_OUTPUT";
+            echo "tag=$TAG" >> "$GITHUB_OUTPUT";
           fi
 
       # -------------------------------
@@ -91,6 +98,9 @@ jobs:
       # -------------------------------
       - name: Setup GitHub page
         run: node .github/scripts/setup-github-page.js
+
+      - name: Copy coverage report to GitHub page
+        run: cp -r coverage gh_page/coverage
 
       - name: Upload build artifact to pages
         uses: actions/upload-pages-artifact@v3
