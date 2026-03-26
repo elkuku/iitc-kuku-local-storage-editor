@@ -12,7 +12,15 @@ yarn start          # Start file server for local testing
 yarn autobuild      # Watch mode for auto-rebuilding on changes
 ```
 
-There are no test commands — this project has no test suite.
+Testing uses [Vitest](https://vitest.dev/):
+```bash
+yarn test           # Run all unit tests once
+yarn test:coverage  # Run tests with HTML + text coverage report
+yarn test:watch     # Watch mode for interactive development
+```
+
+Coverage reports are written to `coverage/` (HTML) and `coverage/coverage-summary.json`.
+Test files follow the `*.spec.ts` naming convention and live alongside the source they test.
 
 Linting uses ESLint with TypeScript support:
 ```bash
