@@ -1,81 +1,50 @@
 body {
-    background: #222;
-    color: #eee;
+    background-color: rgb(39, 37, 28);
+    color: wheat;
     padding-top: 2em;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: rgb(119, 107, 54);
+}
+
+a {
+    color: #00ffbb;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
 }
 
 .container {
     max-width: 900px;
-    background: #2b2b2b;
-    padding: 2em;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    margin-bottom: 2em;
+    padding: 20px;
 }
 
-h1, h3 {
-    color: #4caf50;
-    margin-bottom: 1em;
+div.release-container {
+    border: 1px solid lightgray;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+table.changelog-table td {
+    padding: 5px;
+}
+
+table.changelog-table tr {
+    vertical-align: top;
 }
 
 pre.changelog {
+    color: lime;
     white-space: pre-wrap;
-    background: #1a1a1a;
-    padding: .8em;
-    border-radius: 6px;
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    font-size: 0.9em;
-    border: 1px solid #444;
-    color: #ccc;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
-.changelog-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.changelog-table th, 
-.changelog-table td {
-    padding: 10px;
-    border-bottom: 1px solid #444;
-}
-
-.changelog-version {
-    font-weight: bold;
-    vertical-align: top;
-    color: #4caf50;
-}
-
-.changelog-date {
-    opacity: .7;
-    vertical-align: top;
-    white-space: nowrap;
-}
-
-.release-container {
-    background: #333;
-    padding: 1.5em;
-    border-radius: 10px;
-    margin-bottom: 2.5em;
-    border-left: 5px solid #4caf50;
-}
-
-a {
-    color: #4caf50;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-a:hover {
-    color: #81c784;
-    text-decoration: underline;
-}
-
-ul {
-    padding-left: 1.2em;
-}
-
-li {
-    margin-bottom: 0.5em;
+.badge {
+    margin-right: 5px;
 }
