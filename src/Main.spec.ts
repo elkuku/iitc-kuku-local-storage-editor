@@ -76,20 +76,16 @@ describe('Main', () => {
 
     it('shows dialog and refreshes table', () => {
         mainInstance.init()
-        // @ts-expect-error accessing private
         mainInstance.showDialog()
-        // @ts-expect-error accessing private
         expect(mainInstance.dialog).toBeDefined()
     })
 
     it('saves entry and refreshes table', () => {
         mainInstance.init()
-        // @ts-expect-error accessing private
         mainInstance.showDialog()
         
         // Simulate save button click
         // Since we mocked $ to return a complex object, we just call the refreshTable indirectly
-        // @ts-expect-error accessing private
         mainInstance.refreshTable()
         expect(localStorageMock.setItem).not.toHaveBeenCalled() // we didn't call save yet
     })

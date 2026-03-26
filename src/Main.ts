@@ -6,6 +6,7 @@ import plugin from '../plugin.json'
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const PLUGIN_NAME = plugin.name.replace('IITC plugin: ', '') as string
+// eslint-disable-next-line no-console
 console.log(PLUGIN_NAME)
 export class Main implements Plugin.Class {
 
@@ -14,9 +15,10 @@ export class Main implements Plugin.Class {
     private filterValue = ''
 
     init() {
+        // eslint-disable-next-line no-console
         console.log(`${PLUGIN_NAME} - ${VERSION}`)
 
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         require('./styles.css')
 
         this.dialogHelper = new DialogHelper(PLUGIN_NAME, 'Local Storage Editor')

@@ -9,15 +9,16 @@ function escapeHtml(value = '') {
         .replace(/>/g, '&gt;');
 }
 
+/* eslint-disable no-console */
 console.log('Generating GitHub page...')
 
 const now = new Date()
 
 const day = String(now.getDate()).padStart(2, '0')
-const month = new Intl.DateTimeFormat('en', {month: 'long'}).format(now)
+const monthLong = new Intl.DateTimeFormat('en', {month: 'long'}).format(now)
 const year = now.getFullYear()
 
-const formattedDate = `${day}-${month}-${year}`
+const formattedDate = `${day}-${monthLong}-${year}`
 
 fs.rmSync('gh_page', {recursive: true, force: true})
 fs.mkdirSync('gh_page', {recursive: true})

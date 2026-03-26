@@ -12,7 +12,8 @@
     "autobuild": "yarn ipk autobuild",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",

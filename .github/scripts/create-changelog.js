@@ -29,9 +29,9 @@ function getTags() {
     for (let i = 0; i < fields.length; i += 3) {
         const name = fields[i].trim()
         const date = fields[i + 1].trim()
-        const message = fields[i + 2]?.trim() ?? ''
+        const tagMessage = fields[i + 2]?.trim() ?? ''
 
-        if (name) tags.push({name, date, message})
+        if (name) tags.push({name, date, message: tagMessage})
     }
 
     return tags
