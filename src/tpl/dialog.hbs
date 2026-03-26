@@ -1,5 +1,32 @@
-<div id="{{prefix}}Container">
-
-    Hello {{prefix}}
-
+<div id="{{prefix}}Container" class="ls-container">
+    <div class="ls-toolbar">
+        <input type="text" id="{{prefix}}Filter" placeholder="Filter keys…" />
+        <button id="{{prefix}}AddBtn">+ Add</button>
+    </div>
+    <div class="ls-table-wrap">
+        <table class="ls-table">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="{{prefix}}Body"></tbody>
+        </table>
+    </div>
+    <div id="{{prefix}}EditForm" class="ls-edit-form" style="display:none">
+        <div class="ls-form-row">
+            <label>Key</label>
+            <input type="text" id="{{prefix}}EditKey" />
+        </div>
+        <div class="ls-form-row">
+            <label>Value</label>
+            <textarea id="{{prefix}}EditValue" rows="5"></textarea>
+        </div>
+        <div class="ls-form-btns">
+            <button id="{{prefix}}SaveBtn">Save</button>
+            <button id="{{prefix}}CancelBtn">Cancel</button>
+        </div>
+    </div>
 </div>

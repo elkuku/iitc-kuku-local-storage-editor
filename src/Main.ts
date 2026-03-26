@@ -6,11 +6,12 @@ import plugin from '../plugin.json'
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const PLUGIN_NAME = plugin.name.replace('IITC plugin: ', '') as string
-
+console.log(PLUGIN_NAME)
 class Main implements Plugin.Class {
 
     private dialogHelper: DialogHelper
     private dialog?: JQuery
+    private filterValue = ''
 
     init() {
         console.log(`${PLUGIN_NAME} - ${VERSION}`)
@@ -18,16 +19,15 @@ class Main implements Plugin.Class {
         // eslint-disable-next-line @typescript-eslint/no-require-imports
         require('./styles.css')
 
-        this.dialogHelper = new DialogHelper(PLUGIN_NAME, 'My Plugin')
+        this.dialogHelper = new DialogHelper(PLUGIN_NAME, 'Local Storage Editor')
 
         this.createButtons()
     }
 
     private createButtons(): void {
         IITC.toolbox.addButton({
-            label: 'My Plugin',
-            title: 'My new plugin [X]',
-            accessKey: 'X',
+            label: 'KStorageEditor',
+            title: 'Local Storage Editor',
             id: `btn-${PLUGIN_NAME}`,
             action: this.showDialog
         })
@@ -36,10 +36,75 @@ class Main implements Plugin.Class {
     private showDialog = (): void => {
         if (this.dialog) return
 
-        this.dialog = this.dialogHelper.getDialog()
+        try {
+            this.dialog = this.dialogHelper.getDialog()
+        } catch (e) {
+            alert(e instanceof Error ? e.message : String(e))
+            return
+        }
+
         this.dialog.on('dialogclose', () => { this.dialog = undefined })
 
-        this.dialogHelper.updateDialog()
+        this.setupEvents()
+        this.refreshTable()
+    }
+
+    private setupEvents(): void {
+        const prefix = PLUGIN_NAME
+        const container = this.dialog!.find(`#${prefix}Container`)
+
+        container.find(`#${prefix}Filter`).on('input', (e) => {
+            this.filterValue = (e.target as HTMLInputElement).value.toLowerCase()
+            this.refreshTable()
+        })
+
+        container.find(`#${prefix}AddBtn`).on('click', () => {
+            this.dialogHelper.showEditForm('', '', true)
+        })
+
+        container.find(`#${prefix}Body`).on('click', '.ls-edit-btn', (e) => {
+            const key = $(e.currentTarget).closest('tr').attr('data-key') ?? ''
+            const value = localStorage.getItem(key) ?? ''
+            this.dialogHelper.showEditForm(key, value, false)
+        })
+
+        container.find(`#${prefix}Body`).on('click', '.ls-delete-btn', (e) => {
+            const key = $(e.currentTarget).closest('tr').attr('data-key') ?? ''
+            if (confirm(`Delete "${key}"?`)) {
+                localStorage.removeItem(key)
+                this.refreshTable()
+            }
+        })
+
+        container.find(`#${prefix}SaveBtn`).on('click', () => {
+            const key = (container.find(`#${prefix}EditKey`).val() as string).trim()
+            const value = container.find(`#${prefix}EditValue`).val() as string
+            if (!key) {
+                alert('Key cannot be empty')
+                return
+            }
+            localStorage.setItem(key, value)
+            this.dialogHelper.hideEditForm()
+            this.refreshTable()
+        })
+
+        container.find(`#${prefix}CancelBtn`).on('click', () => {
+            this.dialogHelper.hideEditForm()
+        })
+    }
+
+    private refreshTable(): void {
+        const items: Array<{key: string, value: string}> = []
+
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i)
+            if (key === null) continue
+            if (this.filterValue && !key.toLowerCase().includes(this.filterValue)) continue
+            items.push({key, value: localStorage.getItem(key) ?? ''})
+        }
+
+        items.sort((a, b) => a.key.localeCompare(b.key))
+        this.dialogHelper.renderItems(items)
     }
 }
 

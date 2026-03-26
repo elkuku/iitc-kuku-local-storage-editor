@@ -1,0 +1,100 @@
+.ls-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ls-toolbar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.ls-toolbar input { flex: 1 }
+
+.ls-table-wrap {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.ls-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.ls-table th {
+    background: #444;
+    color: #fff;
+    padding: 4px 6px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+.ls-table td {
+    padding: 3px 6px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.ls-table tr:hover td { background: #f0f0f0 }
+
+.ls-key {
+    font-weight: bold;
+    word-break: break-all;
+    width: 30%;
+}
+
+.ls-value {
+    color: #555;
+    word-break: break-all;
+    font-family: monospace;
+}
+
+.ls-actions { white-space: nowrap }
+
+.ls-delete-btn { color: #c00 }
+
+.ls-empty {
+    text-align: center;
+    color: #888;
+    padding: 12px;
+}
+
+.ls-edit-form {
+    padding: 8px;
+    border-top: 2px solid #ccc;
+    background: #f9f9f9;
+}
+
+.ls-form-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.ls-form-row label {
+    width: 45px;
+    font-weight: bold;
+    padding-top: 4px;
+}
+
+.ls-form-row input,
+.ls-form-row textarea {
+    flex: 1;
+    font-family: monospace;
+    font-size: 11px;
+}
+
+.ls-form-row input[readonly] {
+    background: #e8e8e8;
+    color: #555;
+}
+
+.ls-form-btns {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+}

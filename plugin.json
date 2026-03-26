@@ -1,8 +1,8 @@
 {
-  "name": "IITC plugin: IITC-Plugin-Template",
-  "id": "iitc_plugin_IITCPluginTemplate",
+  "name": "IITC plugin: KuKuStorageEditor",
+  "id": "iitc_plugin_LocalStorageEditor",
   "category": "Misc",
-  "description": "A plugin template",
+  "description": "View and edit browser local storage data",
   "author": "elkuku",
   "entry": "src/Main.ts",
   "minimize": false,
