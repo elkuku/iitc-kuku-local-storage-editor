@@ -9,7 +9,7 @@ export default defineConfig({
         },
     }],
     test: {
-        setupFiles: ['./src/Vitest.setup.ts'],
+        setupFiles: ['./Vitest.setup.ts'],
         include: ['src/**/*.spec.ts'],
         coverage: {
             provider: 'v8',
