@@ -26,6 +26,7 @@ const config = tseslint.config(
     },
     {
         ignores: [
+            ".github/",
             "eslint.config.js",
             "config/",
             "dist/",
@@ -73,7 +74,7 @@ const config = tseslint.config(
             "unicorn/filename-case": ["error",
                 {
                     "case": "pascalCase",
-                    "ignore": [".*\\.d\\.ts$", "^index(\\.d)?\\.ts$", "^API.*", "\\.schema(\\.ts)?", "\\.spec\\.ts$"]
+                    "ignore": [".*\\.d\\.ts$", "^index(\\.d)?\\.ts$", "^API.*", "\\.schema(\\.ts)?", "\\.spec\\.ts$", "vitest\\.config\\.ts$"]
                 }],
             "unicorn/prevent-abbreviations": ["error",
                 {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import {describe, it, expect, vi, beforeEach} from 'vitest'
 
 // Mock dependencies
@@ -35,12 +36,14 @@ vi.stubGlobal('IITC', {
     }
 })
 
-const localStorageMock = (function() {
+const localStorageMock = (() => {
     let store: Record<string, string> = {}
     return {
+        // eslint-disable-next-line unicorn/no-null
         getItem: vi.fn((key: string) => store[key] || null),
         setItem: vi.fn((key: string, value: string) => { store[key] = value }),
-        removeItem: vi.fn((key: string) => { delete store[key] }),
+        removeItem: vi.fn((key: string) => { Reflect.deleteProperty(store, key) }),
+        // eslint-disable-next-line unicorn/no-null
         key: vi.fn((index: number) => Object.keys(store)[index] || null),
         get length() { return Object.keys(store).length },
         clear: () => { store = {} }
@@ -63,7 +66,7 @@ import {Main} from './Main'
 describe('Main', () => {
     let mainInstance: any
 
-    beforeEach(async () => {
+    beforeEach(() => {
         vi.clearAllMocks()
         localStorageMock.clear()
         mainInstance = new Main()

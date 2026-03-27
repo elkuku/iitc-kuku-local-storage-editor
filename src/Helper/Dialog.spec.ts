@@ -156,8 +156,8 @@ describe('DialogHelper', () => {
         // @ts-expect-error accessing private for testing
         expect(helper.dialogElement).toBeUndefined()
 
-        expect(helper.renderItems([])).toBeUndefined()
-        expect(helper.showEditForm('k', 'v', true)).toBeUndefined()
-        expect(helper.hideEditForm()).toBeUndefined()
+        helper.renderItems([])
+        helper.showEditForm('k', 'v', true)
+        helper.hideEditForm()
     })
 })

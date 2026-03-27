@@ -6,7 +6,7 @@ import plugin from '../plugin.json'
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const PLUGIN_NAME = plugin.name.replace('IITC plugin: ', '') as string
-// eslint-disable-next-line no-console
+ 
 console.log(PLUGIN_NAME)
 export class Main implements Plugin.Class {
 
@@ -15,10 +15,11 @@ export class Main implements Plugin.Class {
     private filterValue = ''
 
     init() {
-        // eslint-disable-next-line no-console
+         
         console.log(`${PLUGIN_NAME} - ${VERSION}`)
 
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
+         
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         require('./styles.css')
 
         this.dialogHelper = new DialogHelper(PLUGIN_NAME, 'Local Storage Editor')
@@ -40,8 +41,8 @@ export class Main implements Plugin.Class {
 
         try {
             this.dialog = this.dialogHelper.getDialog()
-        } catch (e) {
-            alert(e instanceof Error ? e.message : String(e))
+        } catch (error) {
+            alert(error instanceof Error ? error.message : String(error))
             return
         }
 
@@ -55,8 +56,8 @@ export class Main implements Plugin.Class {
         const prefix = PLUGIN_NAME
         const container = this.dialog!.find(`#${prefix}Container`)
 
-        container.find(`#${prefix}Filter`).on('input', (e) => {
-            this.filterValue = (e.target as HTMLInputElement).value.toLowerCase()
+        container.find(`#${prefix}Filter`).on('input', (event) => {
+            this.filterValue = (event.target as HTMLInputElement).value.toLowerCase()
             this.refreshTable()
         })
 
@@ -64,14 +65,14 @@ export class Main implements Plugin.Class {
             this.dialogHelper.showEditForm('', '', true)
         })
 
-        container.find(`#${prefix}Body`).on('click', '.ls-edit-btn', (e) => {
-            const key = $(e.currentTarget).closest('tr').attr('data-key') ?? ''
+        container.find(`#${prefix}Body`).on('click', '.ls-edit-btn', (event) => {
+            const key = $(event.currentTarget).closest('tr').attr('data-key') ?? ''
             const value = localStorage.getItem(key) ?? ''
             this.dialogHelper.showEditForm(key, value, false)
         })
 
-        container.find(`#${prefix}Body`).on('click', '.ls-delete-btn', (e) => {
-            const key = $(e.currentTarget).closest('tr').attr('data-key') ?? ''
+        container.find(`#${prefix}Body`).on('click', '.ls-delete-btn', (event) => {
+            const key = $(event.currentTarget).closest('tr').attr('data-key') ?? ''
             if (confirm(`Delete "${key}"?`)) {
                 localStorage.removeItem(key)
                 this.refreshTable()
@@ -96,7 +97,7 @@ export class Main implements Plugin.Class {
     }
 
     private refreshTable(): void {
-        const items: Array<{key: string, value: string}> = []
+        const items: {key: string, value: string}[] = []
 
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i)
