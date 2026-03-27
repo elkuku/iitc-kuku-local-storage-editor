@@ -50,6 +50,14 @@ if (metaFile) {
     version = match ? match[1].trim() : 'n/a'
 }
 
+const devMetaFile = devFiles.filter(fileName => fileName.endsWith('.meta.js'))[0]
+let betaVersion = null
+if (devMetaFile) {
+    const meta = fs.readFileSync(`build/dev/${devMetaFile}`, 'utf8')
+    const match = meta.match(/^\s*\/\/\s*@version\s+(.+)$/m)
+    betaVersion = match ? match[1].trim() : null
+}
+
 const pluginData = JSON.parse(
     fs.readFileSync('plugin.json', 'utf8'),
 )
@@ -121,7 +129,17 @@ template = template
 fs.writeFileSync('gh_page/index.html', template, 'utf8')
 
 const publishedAt = tags.length > 0 ? tags[0].date : ''
-const publishedPluginData = {...pluginData, version: version === 'n/a' ? undefined : version, publishedAt}
+
+const devUserJsFile = devFiles.find(fileName => fileName.endsWith('.user.js') && !fileName.endsWith('.meta.js'))
+const baseUrl = pluginData.downloadURL ? pluginData.downloadURL.replace(/\/files\/release\/[^/]+$/, '') : null
+const betaDownloadURL = devUserJsFile && baseUrl ? `${baseUrl}/files/dev/${devUserJsFile}` : null
+
+const publishedPluginData = {
+    ...pluginData,
+    version: version === 'n/a' ? undefined : version,
+    publishedAt,
+    ...(betaVersion && {betaVersion, betaDownloadURL, betaPublishedAt: formattedDate}),
+}
 fs.writeFileSync('gh_page/plugin.json', JSON.stringify(publishedPluginData, null, 2), 'utf8')
 
 console.log('Finished =;)')
