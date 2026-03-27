@@ -2,6 +2,8 @@
 
 View and edit browser local storage data.
 
+[Info and Download](https://elkuku.github.io/iitc-kuku-local-storage-editor/)
+
 ## Testing
 
 Testing is done with [Vitest](https://vitest.dev/).
