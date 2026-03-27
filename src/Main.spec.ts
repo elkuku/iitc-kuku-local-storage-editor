@@ -4,17 +4,23 @@ import {describe, it, expect, vi, beforeEach} from 'vitest'
 // Mock dependencies
 vi.mock('./Helper/Dialog', () => {
     return {
-        DialogHelper: vi.fn().mockImplementation(() => ({
+        // eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
+        DialogHelper: vi.fn().mockImplementation(function() { return ({
             getDialog: vi.fn().mockReturnValue({
                 on: vi.fn(),
                 find: vi.fn().mockReturnValue({
                     on: vi.fn(),
+                    find: vi.fn().mockReturnValue({
+                        on: vi.fn(),
+                        val: vi.fn().mockReturnValue(''),
+                    }),
+                    val: vi.fn().mockReturnValue(''),
                 }),
             }),
             renderItems: vi.fn(),
             showEditForm: vi.fn(),
             hideEditForm: vi.fn(),
-        }))
+        })})
     }
 })
 
