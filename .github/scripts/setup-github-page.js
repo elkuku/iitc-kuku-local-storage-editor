@@ -120,4 +120,8 @@ template = template
 
 fs.writeFileSync('gh_page/index.html', template, 'utf8')
 
+const publishedAt = tags.length > 0 ? tags[0].date : ''
+const publishedPluginData = {...pluginData, version: version === 'n/a' ? undefined : version, publishedAt}
+fs.writeFileSync('gh_page/plugin.json', JSON.stringify(publishedPluginData, null, 2), 'utf8')
+
 console.log('Finished =;)')
